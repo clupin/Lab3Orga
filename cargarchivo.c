@@ -6,7 +6,7 @@ float* leerArchivo (char *direccion){
     
     FILE *archivo;
     char mensaje;
-    float lista[100000];
+    float lista[100000]  __attribute__((aligned(16)));
     int n;
     int i=0;
     

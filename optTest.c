@@ -12,7 +12,6 @@
 #define N 400
 
 void funcion(float f[]);
-float* leerArchivo (char *direccion);
 
 int main (int argc, char **argv)
 {
@@ -53,28 +52,4 @@ int main (int argc, char **argv)
 
 void funcion(float f[]){
     printf("%f  %f  %f \n",f[0],f[1],f[2]);
-}
-float* leerArchivo (char *direccion){
-    
-    FILE *archivo;
-    char mensaje;
-    float lista[100000];
-    int n;
-    int i=0;
-    
-    archivo = fopen(direccion,"r");
-    
-    if(archivo == NULL){
-        printf("\nError al abrir el archivo");
-    } else {
-        while (feof(archivo)==0){
-            mensaje = fgetc(archivo);
-            lista[i]= atoi(&mensaje);
-            mensaje = fgetc(archivo);
-            i++;
-        }
-    }
-    fclose(archivo);
-    
-    return lista;
 }
