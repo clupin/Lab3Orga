@@ -28,10 +28,13 @@ int _mm_compare_ps(__m128 a, __m128 b){//funcion que compara uno a uno los eleme
     return r;//la hicimos porque no encontramos una que hiciera esto exactamente
 }
 
+
+
 __m128 _mm_pow_ps(__m128 a, __m128 b){//eleva a[i]^b[i] para todo a real, y b entero < 0
     __m128 cero = _mm_set1_ps(0);
     __m128 uno = _mm_set1_ps(1.0);//se declaran las constantes [0,0,0,0] y [1,1,1,1] para ser usadas luego
     
+    b = _mm_parteentera_ps(b);// para evitar problemas con decimales.
     b = _mm_sub_ps(b, uno);//b[i]--
     b = _mm_max_ps(b, cero);// se busca el maximo con 0 para luego comparar y saber cuales deben o no deben ser
     
@@ -58,6 +61,19 @@ __m128 _mm_pow_ps(__m128 a, __m128 b){//eleva a[i]^b[i] para todo a real, y b en
     return resul;// se retorna un vector con los valores pedidos
     
 }
+
+__m128 _mm_pow2_ps(__m128 a, __m128 b){//eleva a[i]^b[i] sin excepciones, pero no de forma paralela
+    float base[4];
+    _mm_store_ps(base, a);
+    float exponente[4];
+    _mm_store_ps(exponente, b);
+    return _mm_setr_ps(
+                       (b[0]==0)?0:powf(base[0], exponente[0]),
+                       (b[1]==0)?0:powf(base[1], exponente[1]),
+                       (b[2]==0)?0:powf(base[2], exponente[2]),
+                       (b[3]==0)?0:powf(base[3], exponente[3]));
+}
+
 float sumar(float *a){
     float sumaF[4];
     __m128 sumas= _mm_set1_ps(0);//suma alineada 1313 iniciadas en 0
@@ -67,9 +83,6 @@ float sumar(float *a){
     for (/*size_t*/ i = 0; i < 100000; i+=4){
         //   multip =1;
         aux = _mm_load_ps(&a[i]);
-        if(_mm_compare_ps(aux, _mm_set1_ps(0)))
-            break
-            ;
         //   calculo = sqrt(a[i]);
         calculo = _mm_sqrt_ps(aux);//se calcula la raiz cuadrada de los 4 float en paralelo
         calculo = _mm_pow_ps(calculo,aux);
