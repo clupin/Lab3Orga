@@ -9,7 +9,7 @@
 
 
 __m128 _mm_parteentera_ps(__m128 a){//calcula parte entera
-    float f[4];
+    float f[4] __attribute__((aligned(16)));
     _mm_store_ps(f,a);
     
     f[0]=(int) f[0];
@@ -22,7 +22,7 @@ __m128 _mm_parteentera_ps(__m128 a){//calcula parte entera
 
 int _mm_compare_ps(__m128 a, __m128 b){//funcion que compara uno a uno los elementos en un vector
     a=_mm_sub_ps(a, b);
-    float f[4];
+    float f[4] __attribute__((aligned(16)));
     _mm_store_ps(f, a);
     int r=((f[0]+f[1]+f[2]+f[3])==0);
     return r;//la hicimos porque no encontramos una que hiciera esto exactamente
@@ -63,9 +63,9 @@ __m128 _mm_pow_ps(__m128 a, __m128 b){//eleva a[i]^b[i] para todo a real, y b en
 }
 
 __m128 _mm_pow2_ps(__m128 a, __m128 b){//eleva a[i]^b[i] sin excepciones, pero no de forma paralela
-    float base[4];
+    float base[4] __attribute__((aligned(16)));
     _mm_store_ps(base, a);
-    float exponente[4];
+    float exponente[4] __attribute__((aligned(16)));
     _mm_store_ps(exponente, b);
     return _mm_setr_ps(
                        (b[0]==0)?0:powf(base[0], exponente[0]),
@@ -75,7 +75,7 @@ __m128 _mm_pow2_ps(__m128 a, __m128 b){//eleva a[i]^b[i] sin excepciones, pero n
 }
 
 float sumar(float *a){
-    float sumaF[4];
+    float sumaF[4] __attribute__((aligned(16)));
     __m128 sumas= _mm_set1_ps(0);//suma alineada 1313 iniciadas en 0
     __m128 calculo;
     int i;
