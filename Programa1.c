@@ -37,7 +37,7 @@ float calcular(float *a, float *b){
     for( i = 0; i < N; i++){
         acc = acc + a[i] / 2 + sqrt(b[i]);
     }
-
+    printf("%f\n", acc);
     for(i = 0; i < N; i++){
         acc2 = acc2 + pow(a[i], 2) - acc;
     }

@@ -32,56 +32,50 @@ int main(int argc, char *argv[])
     // hacer que el programa lea esto desde un archivo
     int i;
     for(i = 0; i < N; i++){
-        a[i] = i + 1;
+        a[i] = i + 2;
     }
     
     for(i = 0; i < N; i++){
-        b[i] = i + 1;
+        b[i] = i + 2;
     }
     
     printf("%f\n", calcular(a, b));
     
     return 0;
 }
-void print_vector(__m128 a){
-    printf("%.1f  %.1f  %.1f  %.1f\n", a[0],a[1],a[2],a[3]);
-}
+
 float calcular(float *a, float *b){
     
-    float acc[4];
+    float acc;
     float acc2[4];
     
     /*for(size_t i = 0; i < N; i++){
         acc = acc + a[i] / 2 + sqrt(b[i]);
     }*/
     __m128 Va,Vb,Vsum,Vsum2;
-    __m128 Ai_2;
+    __m128 Ai_2,sqrtVb;
     int i;
     for(i = 0; i < N; i+=4){
         Va=_mm_load_ps(&a[i]);
-        printf("Va : ");
-        print_vector(Va);
+        
         Vb=_mm_load_ps(&b[i]);
-        printf("Vb : ");
-        print_vector(Vb);
+        sqrtVb= _mm_sqrt_ps(Vb);
+        
         Ai_2 = _mm_div_ps(Va, _mm_set1_ps(2.));
-        printf("Va/2 : ");
-        print_vector(Ai_2);
+        
+
         Vsum = _mm_add_ps(Vsum, Ai_2);
-        Vsum = _mm_add_ps(Vsum, _mm_sqrt_ps(Vb));
-        printf("acc : ");
-        print_vector(Vsum);
+        Vsum = _mm_add_ps(Vsum,sqrtVb);
+        printf("%f\n",Vsum[0]+Vsum[1]+Vsum[2]+Vsum[3]);
 
     }
-    _mm_store_ps(acc, Vsum);
-    float accS = acc[0]+acc[1]+acc[2]+acc[3];
+
+    acc=Vsum[0]+Vsum[1]+Vsum[2]+Vsum[3];
+    printf("%f\n", acc);
     
-    /*for(size_t i = 0; i < N; i++){
-        acc2 = acc2 + pow(a[i], 2) - acc;
-    }*/
     for(i = 0; i < N; i+=4){
         Va=_mm_load_ps(&a[i]);
-        Vsum2 = _mm_add_ps(Vsum2, _mm_sub_ps(_mm_mul_ps(Va, Va), _mm_set1_ps(accS)));
+        Vsum2 = _mm_add_ps(Vsum2, _mm_sub_ps(_mm_mul_ps(Va, Va), _mm_set1_ps(acc)));
     }
     _mm_store_ps(acc2, Vsum2);
     return acc2[0]+acc2[1]+acc2[2]+acc2[3];
