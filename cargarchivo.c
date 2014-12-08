@@ -17,7 +17,8 @@ float* leerArchivo (char *direccion){
     } else {
         while (feof(archivo)==0){
             mensaje = fgetc(archivo);
-            lista[i]= atoi(mensaje);
+            lista[i]= atoi(&mensaje);
+            mensaje = fgetc(archivo);
             i++;
         }
     }

@@ -54,7 +54,6 @@ int main (int argc, char **argv)
 void funcion(float f[]){
     printf("%f  %f  %f \n",f[0],f[1],f[2]);
 }
-
 float* leerArchivo (char *direccion){
     
     FILE *archivo;
@@ -68,11 +67,10 @@ float* leerArchivo (char *direccion){
     if(archivo == NULL){
         printf("\nError al abrir el archivo");
     } else {
-        n = fgetc(archivo);
-        char arr[n];
         while (feof(archivo)==0){
             mensaje = fgetc(archivo);
-            lista[i]= atoi(mensaje);
+            lista[i]= atoi(&mensaje);
+            mensaje = fgetc(archivo);
             i++;
         }
     }
