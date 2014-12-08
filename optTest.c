@@ -1,13 +1,18 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 #include <unistd.h> /* for getopt */
+
+
 #include "cargarchivo.h"
+
 
 
 #define N 400
 
-void funcion(float[] f);
+void funcion(float f[]);
+float* leerArchivo (char *direccion);
 
 int main (int argc, char **argv)
 {
@@ -23,7 +28,9 @@ int main (int argc, char **argv)
         switch (c)
     {
         case 'f':
-            printf("a un paso de lograrlo : %s\n");
+            printf("a un paso de lograrlo : %s\n", optarg);
+            float *F=leerArchivo(optarg);
+            funcion(F);
             break;
         case '?':
             if (optopt == 'f')
@@ -44,6 +51,32 @@ int main (int argc, char **argv)
     return 0;
 }
 
-void funcion(float[] f){
+void funcion(float f[]){
     printf("%f  %f  %f \n",f[0],f[1],f[2]);
+}
+
+float* leerArchivo (char *direccion){
+    
+    FILE *archivo;
+    char mensaje;
+    float lista[100000];
+    int n;
+    int i=0;
+    
+    archivo = fopen(direccion,"r");
+    
+    if(archivo == NULL){
+        printf("\nError al abrir el archivo");
+    } else {
+        n = fgetc(archivo);
+        char arr[n];
+        while (feof(archivo)==0){
+            mensaje = fgetc(archivo);
+            lista[i]= atoi(mensaje);
+            i++;
+        }
+    }
+    fclose(archivo);
+    
+    return lista;
 }
