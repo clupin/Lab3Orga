@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdio.h>
 #include <math.h>
+#include <stdint.h>
 #include "cargarchivo.h"
 
 #define N 4000000

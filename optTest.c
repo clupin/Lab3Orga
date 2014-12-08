@@ -7,6 +7,8 @@
 
 #define N 400
 
+void funcion(float[] f);
+
 int main (int argc, char **argv)
 {
     int aflag = 0;
@@ -21,7 +23,7 @@ int main (int argc, char **argv)
         switch (c)
     {
         case 'f':
-            printf("a un paso de lograrlo\n");
+            printf("a un paso de lograrlo : %s\n");
             break;
         case '?':
             if (optopt == 'f')
@@ -40,4 +42,8 @@ int main (int argc, char **argv)
     for (index = optind; index < argc; index++)
         printf ("Non-option argument %s\n", argv[index]);
     return 0;
+}
+
+void funcion(float[] f){
+    printf("%f  %f  %f \n",f[0],f[1],f[2]);
 }

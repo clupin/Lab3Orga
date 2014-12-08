@@ -13,7 +13,7 @@ Programa2: Programa2.c
 	gcc -o Programa2 Programa2.c -lm -std=c99
 
 funcion1_vect: funcion1_vect.c
-	gcc -o funcion1_vect funcion1_vect.c -std=c99 -msse -msse2 -msse3
+	gcc -o funcion1_vect funcion1_vect.c -lm  -std=c99 -msse -msse2 -msse3
 
 Funcion2_vect: Funcion2_vect.c
 	gcc -o Funcion2_vect Funcion2_vect.c -lm -std=c99 -msse -msse2 -msse3
