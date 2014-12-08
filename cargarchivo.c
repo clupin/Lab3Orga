@@ -1,5 +1,6 @@
-#include "cargarchivo.h"
+
 #include<stdlib.h>
+#include "cargarchivo.h"
 
 float* leerArchivo (char *direccion){
     

@@ -3,7 +3,7 @@
 #include <pmmintrin.h>
 
 #include <stdio.h>
-#include <stdio.h>
+#include "cargarchivo.h"
 #include <math.h>
 
 #define N 400

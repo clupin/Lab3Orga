@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <math.h>
 
+#include "cargarchivo.h"
+
 #define N 400
 
 
