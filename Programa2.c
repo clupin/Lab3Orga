@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
         printf ("Non-option argument %s\n", argv[index]);
     
 
-    printf("\nTiempo transcurrido: %f", ((double)clock() - start) / CLOCKS_PER_SEC);
+    printf("\nTiempo transcurrido: %f\n  ", ((double)clock() - start) / CLOCKS_PER_SEC);
     return 0;
 }
 

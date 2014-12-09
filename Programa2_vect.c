@@ -40,16 +40,17 @@ int main(int argc, char *argv[])
             char mensaje;
             int n;
             int i=0;
-            
+            char * str;
             archivo = fopen(optarg,"r");
             
             if(archivo == NULL){
                 printf("\nError al abrir el archivo");
             } else {
                 while (feof(archivo)==0){
-                    a[i] = fgetc(archivo);
-                    mensaje = fgetc(archivo);
-                    i++;
+                    str=(char *) malloc(99*sizeof(char));
+                    fgets(str,99,archivo);
+                    a[i]=str[0];
+                    i++;           
                 }
             }
             fclose(archivo);
@@ -74,7 +75,7 @@ int main(int argc, char *argv[])
         printf ("Non-option argument %s\n", argv[index]);
     
 
-    printf("\nTiempo transcurrido: %f", ((double)clock() - start) / CLOCKS_PER_SEC);
+    printf("\nTiempo transcurrido: %f\n ", ((double)clock() - start) / CLOCKS_PER_SEC);
     return 0;
 }
 
@@ -83,6 +84,7 @@ int calcular(char *a){
     int i;
     for(i = 0; i < N - 1; i+=4)
     {
+        if( a[i]==0&& a[i+1]==0&&  a[i+2]==0&& a[i+3])break;
         Va=_mm_setr_epi32(a[i], a[i+1], a[i+2], a[i+3]);
         Vb=_mm_setr_epi32(a[i+1], a[i+2], a[i+3], a[i+4]);
         

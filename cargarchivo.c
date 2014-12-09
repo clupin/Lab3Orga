@@ -28,11 +28,7 @@ float* leerArchivo (char *direccion){
             fgets(str,99,archivo);
             str= strtok(str, "\n");
             lista[i]=atof(str);
-            i++;
-            if(i==10000){//limitador
-                break;
-            }
-        }
+            i++;        }
     }
     fclose(archivo);
     
