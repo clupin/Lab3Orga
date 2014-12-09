@@ -10,8 +10,7 @@
 
 #include "cargarchivo.h"
 
-#define N 100000//de preferencia un numero multiplo de 4
-
+#define N 100000//
 
 float modulo(float a[]);
 float sumar(float a[]);
@@ -21,14 +20,11 @@ int main(int argc, char *argv[])
 {
     clock_t start = clock(); 
     float a[N] __attribute__((aligned(16)));
-    int aflag = 0;
-    int bflag = 0;
-    char *cvalue = NULL;
     int index;
     int c;
     int i;
     
-    opterr = 1;
+    opterr = 0;
     
     while ((c = getopt (argc, argv, "f:")) != -1)
         switch (c)
@@ -37,7 +33,7 @@ int main(int argc, char *argv[])
             printf("Leyendo archivo[%s]...\n", optarg);
             float *F=leerArchivo(optarg);
             //for (i; F[i]!=0; i++) printf("i  |  %f\n",F[i]);
-            float valores[N];
+            float valores[N] __attribute__((aligned(16)));
             for (i; F[i]!=0; i++) valores[i]=F[i];
             printf("%f\n",sumar(valores));
             break;
@@ -82,7 +78,7 @@ float modulo(float a[]){
 }
 
 float sumar(float a[] ){
-    float suma[4];
+    float suma[4] __attribute__((aligned(16)));
     float b[N] __attribute__((aligned(16)));
     int i;
     for(i=0;i<N-1;i++)b[i]=a[i-1];//el desface tuve que hacerlo aqui ya que no me dejaba tomar desde &a[i+1]
