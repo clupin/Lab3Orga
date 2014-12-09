@@ -10,7 +10,7 @@ int calcular(char *a);
 
 int main(int argc, char *argv[])
 {
-
+    char a[N];    
     clock_t start = clock(); 
     int index;
     int c;
@@ -22,10 +22,26 @@ int main(int argc, char *argv[])
     {
         case 'f':
             printf("Leyendo archivo[%s]...\n", optarg);
-            float *F=leerArchivo(optarg);
+
+            FILE *archivo;
+            char mensaje;
+            int n;
+            int i=0;
             
+            archivo = fopen(direccion,"r");
             
-            printf("%f\n",calcular(F));
+            if(archivo == NULL){
+                printf("\nError al abrir el archivo");
+            } else {
+                while (feof(archivo)==0){
+                    a[i] = fgetc(archivo);
+                    mensaje = fgetc(archivo);
+                    i++;
+                }
+            }
+            fclose(archivo);
+            
+            printf("%f\n",calcular(a));
             break;
         case '?':
             if (optopt == 'f')
