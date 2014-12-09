@@ -2,6 +2,7 @@
 #include <malloc.h>
 #include <stdio.h>
 #include <math.h>
+#include <time.h>  
 
 #define N 30
 
@@ -26,6 +27,8 @@ float sumar(float *a){
 
 int main(int argc, char *argv[])
 {
+    clock_t start = clock(); 
+
 	printf("el texto\n");
     float a[N];
     int i;
@@ -35,6 +38,7 @@ int main(int argc, char *argv[])
     }
 
     printf("%f\n", sumar(a));
+    printf("\nTiempo transcurrido: %f", ((double)clock() - start) / CLOCKS_PER_SEC);
     
     return 0;
 }
