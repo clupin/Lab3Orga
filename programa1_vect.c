@@ -1,7 +1,7 @@
 #include <xmmintrin.h>
 #include <emmintrin.h>
 #include <pmmintrin.h>
-
+#include <time.h>  
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -20,6 +20,7 @@ int _mm_compare_ps(__m128 a, __m128 b);
 
 int main(int argc, char *argv[])
 {
+    clock_t start = clock();
     float a[N] __attribute__((aligned(16)));
     float b[N] __attribute__((aligned(16)));
     int index;
@@ -62,6 +63,7 @@ int main(int argc, char *argv[])
     for (index = optind; index < argc; index++)
         printf ("Non-option argument %s\n", argv[index]);
     
+    printf("Tiempo transcurrido: %f", ((double)clock() - start) / CLOCKS_PER_SEC)
     return 0;
 }
 

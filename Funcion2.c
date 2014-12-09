@@ -2,6 +2,7 @@
 #include <malloc.h>
 #include <stdio.h>
 #include <math.h>
+#include <time.h>  
 
 #define N 30
 
