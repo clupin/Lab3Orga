@@ -72,10 +72,12 @@ float calcular(float *a, float *b){
     float acc2 = 0;
     int i;
     for( i = 0; i < N; i++){
+        if(a[i]==0)break;//corta el ciclo cuando el arreglo no tiene mas valores validos;
         acc = acc + a[i] / 2 + sqrt(b[i]);
     }
     printf("%f\n", acc);
     for(i = 0; i < N; i++){
+        if(a[i]==0)break;//corta el ciclo cuando el arreglo no tiene mas valores validos;
         acc2 = acc2 + pow(a[i], 2) - acc;
     }
 

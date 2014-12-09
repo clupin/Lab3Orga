@@ -89,7 +89,7 @@ int calcular(char *a){
         Vb=_mm_setr_epi32(a[i+1], a[i+2], a[i+3], a[i+4]);
         
         acum = _mm_add_epi32(acum, _mm_xor_si128(Va, Vb));
-        if( a[i]==0|| a[i+1]==0||  a[i+2]==0|| a[i+3]==0)break;
+        if( a[i]==0|| a[i+1]==0||  a[i+2]==0|| a[i+3]==0)break;//corta el ciclo cuando el arreglo no tiene mas valores validos;
     }
     int32_t *intAcum = (int32_t*) &acum;
     return intAcum[0]+intAcum[1]+intAcum[2]+intAcum[3];

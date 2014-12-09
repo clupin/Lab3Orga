@@ -68,7 +68,7 @@ float modulo(float a[]){
     for( i = 0; i < N; i+=4){
         vector = _mm_load_ps(&a[i]);
         //printf("%.1f %.1f %.1f %.1f\n",vector[0],vector[1],vector[2],vector[3] );
-        if(_mm_compare_ps(vector,_mm_set1_ps(0)))break;
+        if(_mm_compare_ps(vector,_mm_set1_ps(0)))break;//corta el ciclo cuando el arreglo no tiene mas valores validos;
         sum=_mm_add_ps(sum, _mm_mul_ps(vector, vector));
 
     }
@@ -94,7 +94,7 @@ float sumar(float a[] ){
         if (i<elModulo) {
             v1=_mm_add_ps(_mm_set1_ps(0),_mm_load_ps(&a[i]));
             v2=_mm_load_ps(&b[i]);
-            if(_mm_compare_ps(v1,_mm_set1_ps(0)))break;
+            if(_mm_compare_ps(v1,_mm_set1_ps(0)))break;//corta el ciclo cuando el arreglo no tiene mas valores validos;
             sum= _mm_add_ps(sum,_mm_mul_ps(v1, v2));
         }
     }

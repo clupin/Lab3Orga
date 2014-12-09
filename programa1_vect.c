@@ -93,7 +93,7 @@ float calcular(float *a, float *b){
     
     for(i = 0; i < N; i+=4){
         Va=_mm_load_ps(&a[i]);
-        if(_mm_compare_ps(Va,_mm_set1_ps(0)))break;
+        if(_mm_compare_ps(Va,_mm_set1_ps(0)))break;//corta el ciclo cuando el arreglo no tiene mas valores validos;
         Vsum2 = _mm_add_ps(Vsum2, _mm_sub_ps(_mm_mul_ps(Va, Va), _mm_set1_ps(acc)));
     }
     _mm_store_ps(acc2, Vsum2);

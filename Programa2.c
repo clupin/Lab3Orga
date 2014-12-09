@@ -84,7 +84,7 @@ int calcular(char *a){
     for( i = 0; i < N - 1; i++)
     {
 
-        if(a[i]==0)break;
+        if(a[i]==0)break;//corta el ciclo cuando el arreglo no tiene mas valores validos;
         printf("%c  ",a[i]);
         if(i%4==3)printf("\n");
        char tmp = a[i] ^ a[i + 1];

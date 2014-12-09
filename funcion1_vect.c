@@ -75,7 +75,7 @@ float sumar(float *a){
     for ( i = 0; i < 100000; i+=4){
         //   multip =1;
         aux = _mm_load_ps(&a[i]);
-        if(_mm_compare_ps(aux,_mm_set1_ps(0)))break;
+        if(_mm_compare_ps(aux,_mm_set1_ps(0)))break;//corta el ciclo cuando el arreglo no tiene mas valores validos;
         //   calculo = sqrt(a[i]);
         calculo = _mm_sqrt_ps(aux);//se calcula la raiz cuadrada de los 4 float en paralelo
         calculo = _mm_pow2_ps(calculo,aux);// se decidió que por precicion de calculo se utilizará la funcion pow2

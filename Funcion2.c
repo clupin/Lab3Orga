@@ -19,7 +19,9 @@ float modulo(float *a){
     int i;
 
     for (/*size_t*/ i = 0; i < N; i++){
+        if(a[i]==0)break;//corta el ciclo cuando el arreglo no tiene mas valores validos;
         multip =a[i]*a[i];
+
         suma = suma + multip;
     }
 
@@ -36,6 +38,7 @@ float sumar(float *a){
     float cont=0;
     for (/*size_t*/ i = 0; i < N; i++){
         if(i<elModulo){
+            if(a[i]==0)break;//corta el ciclo cuando el arreglo no tiene mas valores validos;
             multip = a[i]*a[i+1];
             suma = suma + multip;
             cont++;
