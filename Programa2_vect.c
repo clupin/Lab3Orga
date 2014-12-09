@@ -83,14 +83,15 @@ int calcular(char *a){
     int i;
     for(i = 0; i < N - 1; i+=4)
     {
-        if( a[i]==0&& a[i+1]==0&&  a[i+2]==0&& a[i+3])break;
+        
+        printf("%c %c %c %c\n", a[i], a[i+1], a[i+2], a[i+3]);
         Va=_mm_setr_epi32(a[i], a[i+1], a[i+2], a[i+3]);
         Vb=_mm_setr_epi32(a[i+1], a[i+2], a[i+3], a[i+4]);
         
         acum = _mm_add_epi32(acum, _mm_xor_si128(Va, Vb));
-        
+        if( a[i]==0|| a[i+1]==0||  a[i+2]==0|| a[i+3]==0)break;
     }
     int32_t *intAcum = (int32_t*) &acum;
-    return intAcum[0]+intAcum[1]+intAcum[2]+intAcum[3]-a[N];
+    return intAcum[0]+intAcum[1]+intAcum[2]+intAcum[3];
 }
 

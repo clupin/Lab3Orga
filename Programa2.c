@@ -38,16 +38,18 @@ int main(int argc, char *argv[])
             char mensaje;
             int n;
             int i=0;
+            char* str;
             
             archivo = fopen(optarg,"r");
             
             if(archivo == NULL){
                 printf("\nError al abrir el archivo");
             } else {
-                while (feof(archivo)==0){
-                    a[i] = fgetc(archivo);
-                    mensaje = fgetc(archivo);
-                    i++;
+                 while (feof(archivo)==0){
+                    str=(char *) malloc(99*sizeof(char));
+                    fgets(str,99,archivo);
+                    a[i]=str[0];
+                    i++;           
                 }
             }
             fclose(archivo);
@@ -81,6 +83,10 @@ int calcular(char *a){
     int i;
     for( i = 0; i < N - 1; i++)
     {
+
+        if(a[i]==0)break;
+        printf("%c  ",a[i]);
+        if(i%4==3)printf("\n");
        char tmp = a[i] ^ a[i + 1];
        acc = acc + tmp;
     }
