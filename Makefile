@@ -16,7 +16,7 @@ funcion1_vect: funcion1_vect.c
 	gcc -o funcion1_vect funcion1_vect.c -lm -L. cargarchivo.c -msse -msse2 -msse3 
 
 Funcion2_vect: Funcion2_vect.c
-	gcc -o Funcion2_vect Funcion2_vect.c -lm -std=c99 -msse -msse2 -msse3
+	gcc -o Funcion2_vect Funcion2_vect.c -lm -L. cargarchivo.c -msse -msse2 -msse3
 
 programa1_vect: programa1_vect.c
 	gcc -o programa1_vect programa1_vect.c -lm -std=c99 -msse -msse2 -msse3
