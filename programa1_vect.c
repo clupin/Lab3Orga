@@ -87,7 +87,7 @@ float calcular(float *a, float *b){
 
         Vsum = _mm_add_ps(Vsum, Ai_2);
         Vsum = _mm_add_ps(Vsum,sqrtVb);
-
+        printf("%f\n", Vsum[0]+Vsum[1]+Vsum[2]+Vsum[3]);
     }
 
     acc=Vsum[0]+Vsum[1]+Vsum[2]+Vsum[3];
