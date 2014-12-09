@@ -84,7 +84,7 @@ int calcular(char *a){
     for(i = 0; i < N - 1; i+=4)
     {
         
-        printf("%c %c %c %c\n", a[i], a[i+1], a[i+2], a[i+3]);
+        //printf("%c %c %c %c\n", a[i], a[i+1], a[i+2], a[i+3]);
         Va=_mm_setr_epi32(a[i], a[i+1], a[i+2], a[i+3]);
         Vb=_mm_setr_epi32(a[i+1], a[i+2], a[i+3], a[i+4]);
         

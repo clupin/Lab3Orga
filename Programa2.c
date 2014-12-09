@@ -85,8 +85,8 @@ int calcular(char *a){
     {
 
         if(a[i]==0)break;//corta el ciclo cuando el arreglo no tiene mas valores validos;
-        printf("%c  ",a[i]);
-        if(i%4==3)printf("\n");
+        //printf("%c  ",a[i]);
+        //if(i%4==3)printf("\n");
        char tmp = a[i] ^ a[i + 1];
        acc = acc + tmp;
     }

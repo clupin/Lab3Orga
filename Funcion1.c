@@ -18,7 +18,7 @@ float sumar(float *a){
 
     for (/*size_t*/ i = 0; i < N; i++){
         if(a[i]==0)break;
-    	printf("%f\n",powf(sqrt(a[i]),a[i]) );
+    	//printf("%f\n",powf(sqrt(a[i]),a[i]) );
         suma +=  powf(sqrt(a[i]),a[i]);
     }
 
