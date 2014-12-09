@@ -7,6 +7,13 @@
 #include <math.h>
 #include <stdint.h>
 #include "cargarchivo.h"
+#include <time.h>
+
+#include <ctype.h>
+
+#include <stdlib.h>
+
+#include <unistd.h> /* for getopt */
 
 #define N 4000000
 
@@ -34,7 +41,7 @@ int main(int argc, char *argv[])
             int n;
             int i=0;
             
-            archivo = fopen(direccion,"r");
+            archivo = fopen(optarg,"r");
             
             if(archivo == NULL){
                 printf("\nError al abrir el archivo");
@@ -73,7 +80,8 @@ int main(int argc, char *argv[])
 
 int calcular(char *a){
     __m128i Va,Vb,acum=_mm_set1_epi32(0);
-    for(size_t i = 0; i < N - 1; i+=4)
+    int i;
+    for(i = 0; i < N - 1; i+=4)
     {
         Va=_mm_setr_epi32(a[i], a[i+1], a[i+2], a[i+3]);
         Vb=_mm_setr_epi32(a[i+1], a[i+2], a[i+3], a[i+4]);

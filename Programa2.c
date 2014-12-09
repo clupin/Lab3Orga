@@ -1,10 +1,21 @@
 #include <stdio.h>
 #include <malloc.h>
 #include <stdio.h>
+#include <math.h>
 #include <time.h>  
 
-#define N 1000000
+ 
+#include <ctype.h>
 
+#include <stdlib.h>
+
+#include <unistd.h> /* for getopt */
+
+#include "cargarchivo.h"
+
+#include "cargarchivo.h"
+
+#define N 100000
 
 int calcular(char *a);
 
@@ -28,7 +39,7 @@ int main(int argc, char *argv[])
             int n;
             int i=0;
             
-            archivo = fopen(direccion,"r");
+            archivo = fopen(optarg,"r");
             
             if(archivo == NULL){
                 printf("\nError al abrir el archivo");
@@ -41,7 +52,7 @@ int main(int argc, char *argv[])
             }
             fclose(archivo);
             
-            printf("%f\n",calcular(a));
+            printf("%i\n",calcular(a));
             break;
         case '?':
             if (optopt == 'f')
@@ -67,8 +78,8 @@ int main(int argc, char *argv[])
 
 int calcular(char *a){
     int acc = 0;
-
-    for(size_t i = 0; i < N - 1; i++)
+    int i;
+    for( i = 0; i < N - 1; i++)
     {
        char tmp = a[i] ^ a[i + 1];
        acc = acc + tmp;

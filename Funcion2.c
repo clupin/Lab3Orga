@@ -1,10 +1,16 @@
-#include <stdio.h>
-#include <malloc.h>
-#include <stdio.h>
-#include <math.h>
-#include <time.h>  
 
-#define N 30
+#include <time.h>  
+#include <ctype.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#include <unistd.h> /* for getopt */
+
+#include "cargarchivo.h"
+
+
+#define N 100000
+
 
 float modulo(float *a){
     float suma = 0;

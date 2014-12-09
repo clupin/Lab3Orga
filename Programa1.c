@@ -4,9 +4,17 @@
 #include <math.h>
 #include <time.h>  
 
+ 
+#include <ctype.h>
+
+#include <stdlib.h>
+
+#include <unistd.h> /* for getopt */
+
 #include "cargarchivo.h"
 
-#define N 400
+
+#define N 100000
 
 
 float calcular(float *a, float *b);
@@ -52,15 +60,10 @@ int main(int argc, char *argv[])
     for (index = optind; index < argc; index++)
         printf ("Non-option argument %s\n", argv[index]);
     
-    printf("Tiempo transcurrido: %f", ((double)clock() - start) / CLOCKS_PER_SEC)
+    printf("Tiempo transcurrido: %f", ((double)clock() - start) / CLOCKS_PER_SEC);
     return 0;
 
 
-
-
-    
-    printf("Tiempo transcurrido: %f", ((double)clock() - start) / CLOCKS_PER_SEC)
-    return 0;
 }
 
 float calcular(float *a, float *b){
