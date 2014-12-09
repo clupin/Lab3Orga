@@ -1,7 +1,7 @@
 all: Funcion1 Funcion2 Programa1 Programa2 funcion1_vect Funcion2_vect programa1_vect Programa2_vect
 
 Funcion1: Funcion1.c
-	gcc -o Funcion1 Funcion1.c -lm
+	gcc -o Funcion1 Funcion1.c -lm 
 
 Funcion2: Funcion2.c
 	gcc -o Funcion2 Funcion2.c -lm
@@ -13,7 +13,7 @@ Programa2: Programa2.c
 	gcc -o Programa2 Programa2.c -lm -std=c99
 
 funcion1_vect: funcion1_vect.c
-	gcc -o funcion1_vect funcion1_vect.c -lm  -std=c99 -msse -msse2 -msse3
+	gcc -o funcion1_vect funcion1_vect.c -lm -L. cargarchivo.c -msse -msse2 -msse3 
 
 Funcion2_vect: Funcion2_vect.c
 	gcc -o Funcion2_vect Funcion2_vect.c -lm -std=c99 -msse -msse2 -msse3

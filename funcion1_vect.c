@@ -11,7 +11,7 @@
 #include "cargarchivo.h"
 
 
-#define N 8*100
+#define N 100000
 
 
 __m128 _mm_parteentera_ps(__m128 a);
@@ -24,7 +24,7 @@ __m128 _mm_pow2_ps(__m128 a, __m128 b);
 
 float sumar(float *a);
 
-int main(int argc, char *argv[])
+int main (int argc, char **argv)
 {
      int aflag = 0;
     int bflag = 0;
@@ -38,9 +38,11 @@ int main(int argc, char *argv[])
         switch (c)
     {
         case 'f':
-            printf("a un paso de lograrlo : %s\n", optarg);
+            printf("Leyendo archivo[%s]...\n", optarg);
             float *F=leerArchivo(optarg);
-            printf("%f",sumar(F));
+            
+            
+            printf("%f\n",sumar(F));
             break;
         case '?':
             if (optopt == 'f')
@@ -69,12 +71,13 @@ float sumar(float *a){
     __m128 calculo;
     int i;
     __m128 aux;
-    for (/*size_t*/ i = 0; i < 100000; i+=4){
+    for ( i = 0; i < 100000; i+=4){
         //   multip =1;
         aux = _mm_load_ps(&a[i]);
+        if(_mm_compare_ps(aux,_mm_set1_ps(0)))break;
         //   calculo = sqrt(a[i]);
         calculo = _mm_sqrt_ps(aux);//se calcula la raiz cuadrada de los 4 float en paralelo
-        calculo = _mm_pow_ps(calculo,aux);
+        calculo = _mm_pow2_ps(calculo,aux);// se decidió que por precicion de calculo se utilizará la funcion pow2
         sumas = _mm_add_ps(sumas, calculo);
         
     }
@@ -130,7 +133,7 @@ int _mm_compare_ps(__m128 a, __m128 b){//funcion que compara uno a uno los eleme
     int r=((f[0]+f[1]+f[2]+f[3])==0);
     return r;//la hicimos porque no encontramos una que hiciera esto exactamente
 }
-__m128 _mm_parteentera_ps(__m128 a){//calcula parte entera
+__m128 _mm_parteentera_ps(__m128 a){//calcula parte  para evtar problemas en la implementacion de la funcion _mm_pow_ps
     float f[4] __attribute__((aligned(16)));
     _mm_store_ps(f,a);
     
