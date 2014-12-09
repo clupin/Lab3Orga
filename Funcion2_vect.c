@@ -5,7 +5,7 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <time.h>  
 #include <unistd.h> /* for getopt */
 
 #include "cargarchivo.h"
@@ -19,7 +19,7 @@ int _mm_compare_ps(__m128 a, __m128 b);
 
 int main(int argc, char *argv[])
 {
-    printf("el texto\n");
+    clock_t start = clock(); 
     float a[N] __attribute__((aligned(16)));
     int aflag = 0;
     int bflag = 0;
@@ -58,6 +58,8 @@ int main(int argc, char *argv[])
     for (index = optind; index < argc; index++)
         printf ("Non-option argument %s\n", argv[index]);
     
+
+    printf("\nTiempo transcurrido: %f", ((double)clock() - start) / CLOCKS_PER_SEC);
     return 0;
 }
 
