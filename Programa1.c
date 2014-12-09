@@ -2,6 +2,7 @@
 #include <malloc.h>
 #include <stdio.h>
 #include <math.h>
+#include <time.h>  
 
 #include "cargarchivo.h"
 
@@ -12,22 +13,53 @@ float calcular(float *a, float *b);
 
 int main(int argc, char *argv[])
 {
+    clock_t start = clock();
     float a[N];
     float b[N];
-
-    // NO hago entrada ahora, solamente números sin significado, usted debe
-    // hacer que el programa lea esto desde un archivo
+    int index;
+    int c;
     int i;
-    for(i = 0; i < N; i++){
-        a[i] = i + 1;
-    }
-
-    for(i = 0; i < N; i++){
-        b[i] = i + 1;
-    }
-
-    printf("%f\n", calcular(a, b));
     
+
+    opterr = 0;
+    
+    while ((c = getopt (argc, argv, "f:")) != -1)
+        switch (c)
+    {
+        case 'f':
+            printf("Leyendo archivo[%s]...\n", optarg);
+            float *F=leerArchivo(optarg);
+            //for (i; F[i]!=0; i++) printf("i  |  %f\n",F[i]);
+            for(i = 0; i < N; i++)a[i] = F[i];
+            
+            for(i = 0; i < N; i++) b[i] = F[i];
+            printf("%f\n",calcular(a,b));
+            break;
+        case '?':
+            if (optopt == 'f')
+                fprintf (stderr, "Opcion -%c requiere la direccion del archivo.\n", optopt);
+            else if (isprint (optopt))
+                fprintf (stderr, "Unknown option `-%c'.\n Seleccione la Opcion -f <filepath> \n", optopt);
+            else
+                fprintf (stderr,
+                         "Unknown option character `\\x%x'.\n",
+                         optopt);
+            return 1;
+        default:
+            abort ();
+    }
+    
+    for (index = optind; index < argc; index++)
+        printf ("Non-option argument %s\n", argv[index]);
+    
+    printf("Tiempo transcurrido: %f", ((double)clock() - start) / CLOCKS_PER_SEC)
+    return 0;
+
+
+
+
+    
+    printf("Tiempo transcurrido: %f", ((double)clock() - start) / CLOCKS_PER_SEC)
     return 0;
 }
 

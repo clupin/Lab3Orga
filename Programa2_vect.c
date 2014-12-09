@@ -16,15 +16,58 @@ __m128i _mm_powi(__m128i a, __m128i b);//protoripo de funcion implementada por n
 
 int main(int argc, char *argv[])
 {
+    clock_t start = clock(); 
     char a[N] __attribute__((aligned(16)));
+    int index;
+    int c;
     
-    // NO hago entrada ahora, solamente números sin significado
-    for(size_t i = 0; i < N; i++){
-        a[i] = i % 120 + 1;
+    opterr = 0;
+    
+    while ((c = getopt (argc, argv, "f:")) != -1)
+        switch (c)
+    {
+        case 'f':
+            printf("Leyendo archivo[%s]...\n", optarg);
+
+            FILE *archivo;
+            char mensaje;
+            int n;
+            int i=0;
+            
+            archivo = fopen(direccion,"r");
+            
+            if(archivo == NULL){
+                printf("\nError al abrir el archivo");
+            } else {
+                while (feof(archivo)==0){
+                    a[i] = fgetc(archivo);
+                    mensaje = fgetc(archivo);
+                    i++;
+                }
+            }
+            fclose(archivo);
+            
+            printf("%d\n",calcular(a));
+            break;
+        case '?':
+            if (optopt == 'f')
+                fprintf (stderr, "Opcion -%c requiere la direccion del archivo.\n", optopt);
+            else if (isprint (optopt))
+                fprintf (stderr, "Unknown option `-%c'.\n", optopt);
+            else
+                fprintf (stderr,
+                         "Unknown option character `\\x%x'.\n",
+                         optopt);
+            return 1;
+        default:
+            abort ();
     }
     
-    printf("%d\n", calcular(a));
-    //2147483647
+    for (index = optind; index < argc; index++)
+        printf ("Non-option argument %s\n", argv[index]);
+    
+
+    printf("\nTiempo transcurrido: %f", ((double)clock() - start) / CLOCKS_PER_SEC);
     return 0;
 }
 
