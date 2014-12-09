@@ -7,7 +7,7 @@
 
 #include "cargarchivo.h"
 
-#define N 30
+#define N 100000
 
 float sumar(float *a){
 
@@ -17,12 +17,9 @@ float sumar(float *a){
     int i,j;
 
     for (/*size_t*/ i = 0; i < N; i++){
-    	multip =1;
-    	calculo = sqrt(a[i]);
-	    for(/*size_t*/ j = 0; j < a[i]; j++){
-	    	multip = multip*calculo;
-	    }
-        suma = suma + multip;
+        if(a[i]==0)break;
+    	printf("%f\n",powf(sqrt(a[i]),a[i]) );
+        suma +=  powf(sqrt(a[i]),a[i]);
     }
 
     return suma;
