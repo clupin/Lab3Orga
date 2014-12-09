@@ -40,18 +40,40 @@ float sumar(float *a){
 
 int main(int argc, char *argv[])
 {
-	printf("el texto\n");
-    float a[N];
-    int i;
-    //"inicializacion" del arreglo
-    /*for(/*size_t i = 0; i < N; i++){
-        a[i] = i + 1;
-    }*/
-    a[0]= 5; a[1]= 3; a[2]= 5; a[3]= 5; a[4]=1; a[5]= 2; a[6]= 1; a[7]= 1; a[8]= 1; a[9]= 5;
-    a[10]= 3; a[11]= 1; a[12]= 3; a[13]= 4; a[14]=1; a[15]= 4; a[16]= 1; a[17]= 2; a[18]= 5; a[19]= 4;
-    a[20]= 2; a[21]= 5; a[22]= 1; a[23]= 4; a[24]=4; a[25]= 4; a[26]= 5; a[27]= 2; a[28]= 2; a[29]= 3;
-
-    printf("%f\n", sumar(a));
+	clock_t start = clock(); 
+    int index;
+    int c;
     
+    opterr = 0;
+    
+    while ((c = getopt (argc, argv, "f:")) != -1)
+        switch (c)
+    {
+        case 'f':
+            printf("Leyendo archivo[%s]...\n", optarg);
+            float *F=leerArchivo(optarg);
+            
+            
+            printf("%f\n",sumar(F));
+            break;
+        case '?':
+            if (optopt == 'f')
+                fprintf (stderr, "Opcion -%c requiere la direccion del archivo.\n", optopt);
+            else if (isprint (optopt))
+                fprintf (stderr, "Unknown option `-%c'.\n", optopt);
+            else
+                fprintf (stderr,
+                         "Unknown option character `\\x%x'.\n",
+                         optopt);
+            return 1;
+        default:
+            abort ();
+    }
+    
+    for (index = optind; index < argc; index++)
+        printf ("Non-option argument %s\n", argv[index]);
+    
+
+    printf("\nTiempo transcurrido: %f", ((double)clock() - start) / CLOCKS_PER_SEC);
     return 0;
 }

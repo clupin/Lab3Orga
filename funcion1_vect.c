@@ -1,7 +1,7 @@
 #include <xmmintrin.h>
 #include <emmintrin.h>
 #include <pmmintrin.h>
-
+#include <time.h>  
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,13 +26,11 @@ float sumar(float *a);
 
 int main (int argc, char **argv)
 {
-     int aflag = 0;
-    int bflag = 0;
-    char *cvalue = NULL;
+    clock_t start = clock(); 
     int index;
     int c;
     
-    opterr = 1;
+    opterr = 0;
     
     while ((c = getopt (argc, argv, "f:")) != -1)
         switch (c)
@@ -60,6 +58,9 @@ int main (int argc, char **argv)
     
     for (index = optind; index < argc; index++)
         printf ("Non-option argument %s\n", argv[index]);
+    
+
+    printf("\nTiempo transcurrido: %f", ((double)clock() - start) / CLOCKS_PER_SEC);
     return 0;
 }
 
