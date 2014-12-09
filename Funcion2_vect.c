@@ -37,7 +37,9 @@ int main(int argc, char *argv[])
             printf("Leyendo archivo[%s]...\n", optarg);
             float *F=leerArchivo(optarg);
             //for (i; F[i]!=0; i++) printf("i  |  %f\n",F[i]);
-            printf("%f\n",sumar(F));
+            float valores[N];
+            for (i; F[i]!=0; i++) valores[i]=F[i];
+            printf("%f\n",sumar(valores));
             break;
         case '?':
             if (optopt == 'f')
@@ -68,6 +70,7 @@ float modulo(float a[]){
     for( i = 0; i < N; i+=4){
         vector = _mm_load_ps(&a[i]);
         //printf("%.1f %.1f %.1f %.1f\n",vector[0],vector[1],vector[2],vector[3] );
+        if(_mm_compare_ps(vector,_mm_set1_ps(0)))break;
         sum=_mm_add_ps(sum, _mm_mul_ps(vector, vector));
 
     }
@@ -84,7 +87,10 @@ float sumar(float a[] ){
     __m128 sum = _mm_set1_ps(0);
     __m128 v1;
     __m128 v2;
+    //for (i=0; i<10; i++) printf("i  |  %f\n",a[i]);
+
     float elModulo = modulo(a);
+
 
     for (i = 0; i < N; i+=4){
         if (i<elModulo) {
